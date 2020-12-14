@@ -1,15 +1,23 @@
-module Main where
+-- module Main where
 import System.IO
+import Data.Char
+import Data.Maybe
+import Data.List
+import Text.Printf
 
 
 main :: IO ()
 main = do
-  let max_val = 0
   contents <- readFile "1.txt"
-  let words_list = words contents
-  let mm = map readInt words_list
-  print max_val
+  let wordList = words contents
+  let intList = map readInt wordList
+  let maxVal = max' intList
+  print maxVal
 
 
 readInt :: String -> Int
 readInt = read
+
+max' :: [Int] -> Int
+max' (x:xs) = foldl (\acc curr -> if curr > acc then curr else acc) x xs
+
